@@ -1,5 +1,6 @@
 import sys
 import os
+from AVASPyLibs import AVASBasic
 
 version = "0.0.1"
 
@@ -15,20 +16,11 @@ def errlog(log):
 def run():
     if ".avas" in sys.argv[1]:
         log("Avas file supplied: " + sys.argv[1])
-        parser(sys.argv[1])
+        AVASBasic.parser(sys.argv[1])
     else:
         log("AVAS Parser v" + version)
         log("Args: " + str(sys.argv))
 
-def parser(fname):
-    file = open(fname, "r")
-    ln = 0
-    for line in file.readlines():
-        if "@AVASType : script" in line.strip():
-            errlog("Script type is not currently supported in the parser")
-            exit()
-        ln += 1
-        parselog(line.strip(), ln)
 
 if __name__ == "__main__":
     run()
