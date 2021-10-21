@@ -1,6 +1,6 @@
 import sys
 import os
-from AVASPyLibs import AVASBasic
+from AVASPyLibs import AVASLang
 
 version = "0.0.1"
 
@@ -16,7 +16,7 @@ def errlog(log):
 def run():
     if ".avas" in sys.argv[1]:
         log("Avas file supplied: " + sys.argv[1])
-        AVASBasic.parser(sys.argv[1])
+        AVASLang.parser(sys.argv[1])
     else:
         log("AVAS Parser v" + version)
         log("Args: " + str(sys.argv))
