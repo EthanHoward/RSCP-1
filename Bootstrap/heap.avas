@@ -1,7 +1,0 @@
-@AVASType : heap
-
-
-
-ADD 30 12 ^ PUT HEAP
-COUT HEAP 
-HALT
