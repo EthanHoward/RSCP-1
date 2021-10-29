@@ -1,0 +1,7 @@
+// Not needed import due to it being "Sys" which is rws standard
+$incl("Sys");
+
+void main(void)
+{
+    Sys.out.println("Hey! User, heres an example of an equasion %d", 236 - 192);
+}
