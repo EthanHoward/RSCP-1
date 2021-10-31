@@ -36,7 +36,9 @@ namespace Parser
 					throw runtime_error(string("[1]: Unknown excape sequence: \\" + string(1, curChr)) + " in string on line " + to_string(currentToken.mLineNumber) + ".");
 					break;
 				}
+				currentToken.mText = STRING_LITERAL;
 			}
+
 			switch (curChr)
 			{
 			case '0':
@@ -53,25 +55,28 @@ namespace Parser
 				{
 					currentToken.mType = INTEGER_LITERAL;
 					currentToken.mText.append(1, curChr);
-				}
-				else
-				{
+				} else if (currentToken.mType == POTENTIAL_DOUBLE) {
+					currentToken.mType = DOUBLE_LITERAL;
+					currentToken.mText.append(1, curChr);
+				} else {
 					currentToken.mText.append(1, curChr);
 				}
 				break;
+//////////////////////
 			case '.':
-				if (currentToken.mType == WHITESPACE)
-				{
+				if (currentToken.mType == WHITESPACE) {
 					currentToken.mType = POTENTIAL_DOUBLE;
 					currentToken.mText.append(1, curChr);
-				}
-				else if (currentToken.mType == INTEGER_LITERAL)
-				{
+				} else if (currentToken.mType == INTEGER_LITERAL) {
 					currentToken.mType = DOUBLE_LITERAL;
-				}
-				else
-				{
 					currentToken.mText.append(1, curChr);
+				} else if (currentToken.mType == STRING_LITERAL) {
+					currentToken.mText.append(1, curChr);
+				} else {
+					endToken(currentToken, Tokens);
+					currentToken.mType = OPERATOR;
+					currentToken.mText.append(1, curChr);
+					endToken(currentToken, Tokens);
 				}
 				break;
 			case '{':
@@ -135,9 +140,19 @@ namespace Parser
 //////////////////////
 
 			default:
+				if (currentToken.mType == WHITESPACE || currentToken.mType == INTEGER_LITERAL || currentToken.mType == DOUBLE_LITERAL) {
+					endToken(currentToken, Tokens);
+					currentToken.mType = IDENTIFER;
+					currentToken.mText.append(1, curChr);
+				}
+				else {
+					currentToken.mText.append(1, curChr);
+				}
 				break;
 			}
 		}
+
+		endToken(currentToken, Tokens);
 
 		return Tokens;
 	}
