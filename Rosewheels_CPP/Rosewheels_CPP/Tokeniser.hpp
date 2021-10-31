@@ -9,11 +9,12 @@ namespace Parser
 	using namespace std;
 
 	enum TokenType {
-		WHITESPACE,
+		WHITESPACE, // No token has this type
 		IDENTIFER,
 		INTEGER_LITERAL,
 		STRING_LITERAL,
-		OPERATOR
+		OPERATOR,
+		STRING_ESCAPE_SEQUENCE
 	};
 
 	class Token {
@@ -28,6 +29,8 @@ namespace Parser
 	class Tokeniser {
 	public:
 		vector<Token>parse(const string& inProgram);
+	private:
+		void endToken(Token& token, vector<Token>& tokens);
 	};
 
 };
