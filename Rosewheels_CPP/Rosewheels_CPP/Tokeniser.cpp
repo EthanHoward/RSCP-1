@@ -60,6 +60,19 @@ namespace Parser
 				}
 				break;
 			case '.':
+				if (currentToken.mType == WHITESPACE)
+				{
+					currentToken.mType = POTENTIAL_DOUBLE;
+					currentToken.mText.append(1, curChr);
+				}
+				else if (currentToken.mType == INTEGER_LITERAL)
+				{
+					currentToken.mType = DOUBLE_LITERAL;
+				}
+				else
+				{
+					currentToken.mText.append(1, curChr);
+				}
 				break;
 			case '{':
 			case '}':
@@ -81,7 +94,7 @@ namespace Parser
 					currentToken.mText.append(1, curChr);
 				}
 				break;
-
+//////////////////////
 			case ' ':
 			case '\t':
 				endToken(currentToken, Tokens);
@@ -91,7 +104,7 @@ namespace Parser
 				endToken(currentToken, Tokens);
 				++currentToken.mLineNumber;
 				break;
-
+//////////////////////
 			case '"':
 				if (currentToken.mType != STRING_LITERAL)
 				{
@@ -104,7 +117,7 @@ namespace Parser
 					endToken(currentToken, Tokens);
 				}
 				break;
-
+//////////////////////
 			case '\\':
 				if (currentToken.mType != STRING_LITERAL)
 				{
@@ -119,9 +132,9 @@ namespace Parser
 					endToken(currentToken, Tokens);
 				}
 				break;
+//////////////////////
 
 			default:
-
 				break;
 			}
 		}
