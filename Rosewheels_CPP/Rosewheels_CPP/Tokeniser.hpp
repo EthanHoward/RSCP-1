@@ -3,12 +3,13 @@
 #include <vector>
 #include <string>
 
-namespace Parser 
+namespace Parser
 {
 
 	using namespace std;
 
-	enum TokenType {
+	enum TokenType
+	{
 		WHITESPACE, // No token has this type
 		IDENTIFER,
 		INTEGER_LITERAL,
@@ -17,20 +18,26 @@ namespace Parser
 		STRING_ESCAPE_SEQUENCE
 	};
 
-	class Token {
-		public:
-			enum TokenType mType{WHITESPACE};
-			string mText;
-			size_t mStartOffset{0};
-			size_t mEndOffset{0};
-			size_t mLineNumber{0};
+	class Token
+	{
+	public:
+		enum TokenType mType
+		{
+			WHITESPACE
+		};
+		string mText;
+		size_t mStartOffset{0};
+		size_t mEndOffset{0};
+		size_t mLineNumber{0};
 	};
 
-	class Tokeniser {
+	class Tokeniser
+	{
 	public:
-		vector<Token>parse(const string& inProgram);
+		vector<Token> parse(const string &inProgram);
+
 	private:
-		void endToken(Token& token, vector<Token>& tokens);
+		void endToken(Token &token, vector<Token> &tokens);
 	};
 
 };
