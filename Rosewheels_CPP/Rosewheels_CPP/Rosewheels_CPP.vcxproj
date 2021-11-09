@@ -143,7 +143,6 @@
     <ClCompile Include="Tokeniser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mLibs.hpp" />
     <ClInclude Include="Tokeniser.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

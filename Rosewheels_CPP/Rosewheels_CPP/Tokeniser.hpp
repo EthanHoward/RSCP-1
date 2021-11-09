@@ -10,14 +10,16 @@ namespace Parser
 
 	enum TokenType
 	{
-		WHITESPACE, // No token has this type
+		WHITESPACE, // No Token::TokenType should have this set, if it does have this set it should only be a whitespace
 		IDENTIFER,
 		INTEGER_LITERAL,
 		DOUBLE_LITERAL,
 		STRING_LITERAL,
-		OPERATOR,
+		OPERATOR, // = / ? > < . - + *
 		STRING_ESCAPE_SEQUENCE,
-		POTENTIAL_DOUBLE
+		POTENTIAL_DOUBLE,
+		POTENTIAL_COMMENT,
+		COMMENT
 	};
 
 	class Token

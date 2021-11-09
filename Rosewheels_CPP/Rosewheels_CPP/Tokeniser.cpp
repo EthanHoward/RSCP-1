@@ -1,5 +1,6 @@
 #include "Tokeniser.hpp"
 #include <stdexcept>
+#include <iostream>
 
 namespace Parser
 {
@@ -13,9 +14,12 @@ namespace Parser
 
 		currentToken.mLineNumber = 1;
 
-		for (char curChr : inProgram) {
-			if (currentToken.mType == STRING_ESCAPE_SEQUENCE) {
-				switch (curChr) {
+		for (char curChr : inProgram)
+		{
+			if (currentToken.mType == STRING_ESCAPE_SEQUENCE)
+			{
+				switch (curChr)
+				{
 				case 'n':
 					currentToken.mText.append(1, '\n');
 					break;
@@ -24,18 +28,20 @@ namespace Parser
 					break;
 				case 't':
 					currentToken.mText.append(1, '\t');
+
 				case '\\':
 					currentToken.mText.append(1, '\\');
 					break;
+
 				default:
 					throw runtime_error(string("[1]: Unknown excape sequence: \\" + string(1, curChr)) + " in string on line " + to_string(currentToken.mLineNumber) + ".");
 					break;
 				}
-				currentToken.mType = STRING_LITERAL;
-				continue;
+				currentToken.mText = STRING_LITERAL;
 			}
 
-			switch (curChr) {
+			switch (curChr)
+			{
 			case '0':
 			case '1':
 			case '2':
@@ -133,6 +139,20 @@ namespace Parser
 				}
 				break;
 //////////////////////
+			case '/':
+				if (currentToken.mType == STRING_LITERAL) {
+					currentToken.mText.append(1, curChr);
+				} else if (currentToken.mType == STRING_LITERAL) {
+					currentToken.mType = COMMENT;
+					currentToken.mText.erase();
+				} else {
+					endToken(currentToken, Tokens);
+					currentToken.mType = POTENTIAL_COMMENT;
+					currentToken.mText.append(1, curChr);
+				}
+				break;
+
+
 
 			default:
 				if (currentToken.mType == WHITESPACE || currentToken.mType == INTEGER_LITERAL || currentToken.mType == DOUBLE_LITERAL) {
@@ -154,9 +174,15 @@ namespace Parser
 
 	void Tokeniser::endToken(Token &token, vector<Token> &tokens)
 	{
-		if (token.mType != WHITESPACE)
-		{
+		if (token.mType == COMMENT) {
+			cout << "Ignoring comment " << token.mText << endl;
+		} else if (token.mType == WHITESPACE) {
 			tokens.push_back(token);
+		} else if (token.mType == POTENTIAL_DOUBLE) {
+			if (token.mText.compare(".") == 0) {
+				token.mType = OPERATOR;
+			}
+			token.mType = DOUBLE_LITERAL;
 		}
 		token.mType = WHITESPACE;
 		token.mText.erase();
