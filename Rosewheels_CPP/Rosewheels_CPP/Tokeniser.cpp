@@ -13,12 +13,9 @@ namespace Parser
 
 		currentToken.mLineNumber = 1;
 
-		for (char curChr : inProgram)
-		{
-			if (currentToken.mType == STRING_ESCAPE_SEQUENCE)
-			{
-				switch (curChr)
-				{
+		for (char curChr : inProgram) {
+			if (currentToken.mType == STRING_ESCAPE_SEQUENCE) {
+				switch (curChr) {
 				case 'n':
 					currentToken.mText.append(1, '\n');
 					break;
@@ -27,20 +24,18 @@ namespace Parser
 					break;
 				case 't':
 					currentToken.mText.append(1, '\t');
-
 				case '\\':
 					currentToken.mText.append(1, '\\');
 					break;
-
 				default:
 					throw runtime_error(string("[1]: Unknown excape sequence: \\" + string(1, curChr)) + " in string on line " + to_string(currentToken.mLineNumber) + ".");
 					break;
 				}
-				currentToken.mText = STRING_LITERAL;
+				currentToken.mType = STRING_LITERAL;
+				continue;
 			}
 
-			switch (curChr)
-			{
+			switch (curChr) {
 			case '0':
 			case '1':
 			case '2':
