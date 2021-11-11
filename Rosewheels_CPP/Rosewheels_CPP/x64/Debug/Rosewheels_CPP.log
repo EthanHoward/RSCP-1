@@ -1,2 +1,5 @@
 ﻿  main.cpp
-  Rosewheels_CPP.vcxproj -> D:\DesktopItems\code\Rosewheels\Rosewheels_CPP\x64\Debug\Rosewheels_CPP.exe
+  Tokeniser.cpp
+C:\Users\Ethan\Desktop\code\Rosewheels\Rosewheels_CPP\Rosewheels_CPP\Tokeniser.cpp(137,25): warning C4553: '==': result of expression not used; did you intend '='?
+  Generating Code...
+  Rosewheels_CPP.vcxproj -> C:\Users\Ethan\Desktop\code\Rosewheels\Rosewheels_CPP\x64\Debug\Rosewheels_CPP.exe

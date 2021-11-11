@@ -38,7 +38,7 @@ namespace Parser
 	class Tokeniser
 	{
 	public:
-		vector<Token> parse(const string &inProgram);
+		vector<Token> parse(const std::string &inProgram);
 
 	private:
 		void endToken(Token &token, vector<Token> &tokens);

@@ -37,7 +37,8 @@ namespace Parser
 					throw runtime_error(string("[1]: Unknown excape sequence: \\" + string(1, curChr)) + " in string on line " + to_string(currentToken.mLineNumber) + ".");
 					break;
 				}
-				currentToken.mText = STRING_LITERAL;
+				currentToken.mType = STRING_LITERAL;
+				continue;
 			}
 
 			switch (curChr)
@@ -133,7 +134,7 @@ namespace Parser
 				else if (currentToken.mType == STRING_LITERAL)
 				{
 					endToken(currentToken, Tokens);
-					currentToken.mType == OPERATOR;
+					currentToken.mType = OPERATOR;
 					currentToken.mText.append(1, curChr);
 					endToken(currentToken, Tokens);
 				}
