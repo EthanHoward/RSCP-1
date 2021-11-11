@@ -3,7 +3,7 @@ The extension/s are: .rsw .rw
 #### SYTAX
 >
 - $incl("") => includes a library, currently the only library is "Sys" however, even if not imported, it will still work </br>
- - Sys.in/out.undefined() - System, used for console outputs and inputs and possibly at some point, piping to another process </br>
+ - Sys.in/out.(undefined-parts) - System, used for console outputs and inputs and possibly at some point, piping to another process </br>
  - "void" void foo(void){func-content} returns nothing and errors if a "return" is found in the func </br>
  - static - can not have any non-static vars in it otherwise => Error
  - const - value can not be changed
