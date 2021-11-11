@@ -1,4 +1,4 @@
-# <img src="https://i.ibb.co/3hXBtqr/Tudor-Rose.png" alt="Tudor-Rose" border="0">
+# <img src="https://i.ibb.co/3hXBtqr/Tudor-Rose.png" alt="Tudor-Rose" border="0" width="100" height="100">
 # Rosewheels
 > My own programming language - or at least an attempt at </br>
 ## INFO
