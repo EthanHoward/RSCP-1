@@ -3,5 +3,5 @@
 ## INFO
 [INFO.md](https://github.com/EthanHoward/Rosewheels-lang/master/INFO.md)
 ## LICENSE
-[LICENSE.md](https://github.com/EthanHoward/Rosewheels-lang/master/LICENSE.md)
+[LICENSE.md](https://github.com/EthanHoward/Rosewheels-lang/blob/master/LICENSE.md)
  
