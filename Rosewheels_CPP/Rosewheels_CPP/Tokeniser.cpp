@@ -34,10 +34,14 @@ namespace Parser
 					break;
 
 				default:
-					throw runtime_error(string("[1]: Unknown excape sequence: \\" + string(1, curChr)) + " in string on line " + to_string(currentToken.mLineNumber) + ".");
+					throw runtime_error(string("[1]: Unknown escape sequence: \\" + string(1, curChr)) + " in string on line " + to_string(currentToken.mLineNumber) + ".");
 					break;
 				}
 				currentToken.mType = STRING_LITERAL;
+				continue;
+			} else if (currentToken.mType == POTENTIAL_COMMENT && curChr != '/') {
+				currentToken.mType = OPERATOR;
+				endToken(currentToken, Tokens);
 				continue;
 			}
 
@@ -143,7 +147,7 @@ namespace Parser
 			case '/':
 				if (currentToken.mType == STRING_LITERAL) {
 					currentToken.mText.append(1, curChr);
-				} else if (currentToken.mType == STRING_LITERAL) {
+				} else if (currentToken.mType == POTENTIAL_COMMENT) {
 					currentToken.mType = COMMENT;
 					currentToken.mText.erase();
 				} else {
@@ -173,20 +177,26 @@ namespace Parser
 		return Tokens;
 	}
 
-	void Tokeniser::endToken(Token &token, vector<Token> &tokens)
-	{
+	void Tokeniser::endToken(Token& token, vector<Token>& tokens) {
 		if (token.mType == COMMENT) {
 			cout << "Ignoring comment " << token.mText << endl;
-		} else if (token.mType == WHITESPACE) {
+		}
+		else if (token.mType != WHITESPACE) {
 			tokens.push_back(token);
-		} else if (token.mType == POTENTIAL_DOUBLE) {
+		}
+		if (token.mType == POTENTIAL_DOUBLE) {
 			if (token.mText.compare(".") == 0) {
 				token.mType = OPERATOR;
 			}
-			token.mType = DOUBLE_LITERAL;
+			else {
+				token.mType = DOUBLE_LITERAL;
+			}
 		}
 		token.mType = WHITESPACE;
 		token.mText.erase();
 	}
 
+	void Token::DebugPrint() {
+		cout << "Token(" << sTokenTypeStrings[mType] << ", \"" << mText << "\" " << mLineNumber << ")" << endl;
+	}
 }
