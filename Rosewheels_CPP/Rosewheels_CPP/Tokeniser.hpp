@@ -6,6 +6,11 @@
 namespace Parser
 {
 
+	// NOTES: 
+	// 1:11:16 - vid timing 23/11/21
+	//
+	// NOTES;
+
 	using namespace std;
 
 	const char* sTokenTypeStrings[] = {
@@ -44,8 +49,8 @@ namespace Parser
 		};
 		string mText;
 		size_t mLineNumber{0};
-		
-		void DebugPrint() const;
+
+		void DebugPrint();
 
 	};
 
