@@ -1,15 +1,21 @@
-#pragma once 
+#pragma once
+#include <string>
+#include <iostream>
 #include <Windows.h>
 
 void s_cons_col(int col) {
-    HANDLE hConsole;
+	HANDLE hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, col);
 }
 
+void p_dbg_msg(std::string log) {
+	std::cout << "[+] " << log << std::endl;
+}
+
 void p_err_msg(std::string log) {
 	s_cons_col(5);
-	std::cout << "[ERR] " + log << std::endl;
+	std::cout << "[-] " << log << std::endl;
 	s_cons_col(7);
 }
 
