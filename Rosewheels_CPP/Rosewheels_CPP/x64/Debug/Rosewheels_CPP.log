@@ -1,2 +1,4 @@
-﻿  main.cpp
+﻿LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
+Tokeniser.obj : warning LNK4006: "char const * * Parser::sTokenTypeStrings" (?sTokenTypeStrings@Parser@@3PAPEBDA) already defined in main.obj; second definition ignored
+C:\Users\Ethan\Desktop\code\Rosewheels\Rosewheels_CPP\x64\Debug\Rosewheels_CPP.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
   Rosewheels_CPP.vcxproj -> C:\Users\Ethan\Desktop\code\Rosewheels\Rosewheels_CPP\x64\Debug\Rosewheels_CPP.exe

@@ -15,7 +15,7 @@ void p_dbg_msg(std::string log) {
 
 void p_err_msg(std::string log) {
 	s_cons_col(5);
-	std::cout << "[-] " << log << std::endl;
+	std::cerr << "[-] " << log << std::endl;
 	s_cons_col(7);
 }
 

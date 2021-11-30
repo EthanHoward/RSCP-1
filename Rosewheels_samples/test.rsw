@@ -1,8 +1,8 @@
-// Not needed import due to it being "Sys" which is rws standard
-$incl("Sys");
+//NotneededimportduetoitbeingSyswhichisrwsstandard
+//inclSys
 
 void main(void)
 {
     double foo = 1.3;
-    Sys.out.println("Hey! User, heres an example of an equasion %d", 236 - 192);
+    Sys.out.println("Hey! User, here is an example of an equasion %d", 236 - 192);
 }

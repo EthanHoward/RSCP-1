@@ -179,7 +179,7 @@ namespace Parser
 
 	void Tokeniser::endToken(Token& token, vector<Token>& tokens) {
 		if (token.mType == COMMENT) {
-			cout << "Ignoring comment " << token.mText << endl;
+			cout << "[+] " << "Ignoring comment " << token.mText << endl;
 		}
 		else if (token.mType != WHITESPACE) {
 			tokens.push_back(token);
@@ -197,6 +197,6 @@ namespace Parser
 	}
 
 	void Token::DebugPrint() {
-		cout << "Token(" << sTokenTypeStrings[mType] << ", \"" << mText << "\" " << mLineNumber << ")" << endl;
+		cout << "[+] " << "Token(" << sTokenTypeStrings[mType] << ", \"" << mText << "\" " << mLineNumber << ")" << endl;
 	}
 }

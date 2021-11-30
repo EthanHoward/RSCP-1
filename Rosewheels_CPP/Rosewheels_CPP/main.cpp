@@ -1,24 +1,31 @@
 #include <iostream>
 #include "Libraries.hpp"
+#include "Tokeniser.hpp"
 
 using namespace std;
+using namespace Parser;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	p_dbg_msg("Rosewheels intepreter started");
-	if (argc <= 1 || argc == NULL) p_err_msg("No arguments supplied");
-	else if (argc == 2) {
-		//file supplied
-		if (c_chrstr_str(argv[1]).find(".rsw") != std::string::npos) {
-			p_dbg_msg(".rsw file supplied");
-		} else if (c_chrstr_str(argv[1]).find(".rs") != std::string::npos) {
-			p_dbg_msg(".rs file supplied");
-		}
-		else {
-			p_err_msg("This is not a supported file type");
-		}
+
+	
+	FILE* fh = fopen("C:\\Users\\Ethan\\Desktop\\code\\Rosewheels\\Rosewheels_samples\\test.rsw", "r");
+	if (!fh) { p_err_msg(" Could not open file "); }
+	fseek(fh, 0, SEEK_END);
+	size_t fileSize = ftell(fh);
+	fseek(fh, 0, SEEK_SET);
+	string fileContents(fileSize, ' ');
+	fread((void*)fileContents.data(), 1, fileSize, fh);
+
+	p_dbg_msg("File contents: \n|\n" + fileContents + " \n|");
+
+	Tokeniser tokeniser;
+	vector<Token> tokens = tokeniser.parse(fileContents);
+
+	for (Token currentToken : tokens) {
+		currentToken.DebugPrint();
 	}
-	else {
-		p_err_msg("Unknown Error");
-	}
+
+	return 0;
 }
